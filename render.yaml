@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: api-jogos
+    env: java
+    buildCommand: mvn clean install
+    startCommand: java -Dserver.port=$PORT -jar target/api-jogos-1.0.0.jar
+    healthCheckPath: /login
