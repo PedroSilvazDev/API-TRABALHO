@@ -1,7 +1,8 @@
 services:
   - type: web
     name: api-jogos
-    env: java
-    buildCommand: mvn clean install
-    startCommand: java -Dserver.port=$PORT -jar target/api-jogos-1.0.0.jar
-    healthCheckPath: /login
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    # GET que responde 200 — /login é só POST e quebra o health check do Render
+    healthCheckPath: /login-test
+    plan: free
