@@ -21,4 +21,9 @@ public class AuthController {
         String token = authService.login(request.getEmail(), request.getPassword());
         return ResponseEntity.ok(new LoginResponse(token));
     }
+
+    @GetMapping("/login-test")
+public String teste() {
+    return "API funcionando";
+}
 }
