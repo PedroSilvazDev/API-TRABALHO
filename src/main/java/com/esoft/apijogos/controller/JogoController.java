@@ -22,17 +22,14 @@ public class JogoController {
         this.authService = authService;
     }
     
+    /** Leitura pública — dá para abrir no browser; PDF não exige token nos GET. */
     @GetMapping
-    public ResponseEntity<List<Jogo>> listarJogos(
-            @RequestHeader(value = "Authorization", required = false) String authorization) {
-        authService.validarToken(authorization);
+    public ResponseEntity<List<Jogo>> listarJogos() {
         return ResponseEntity.ok(jogoService.listarTodos());
     }
-    
+
     @GetMapping("/{id}")
-    public ResponseEntity<Jogo> buscarJogo(@PathVariable Integer id,
-            @RequestHeader(value = "Authorization", required = false) String authorization) {
-        authService.validarToken(authorization);
+    public ResponseEntity<Jogo> buscarJogo(@PathVariable Integer id) {
         return ResponseEntity.ok(jogoService.buscarPorId(id));
     }
     

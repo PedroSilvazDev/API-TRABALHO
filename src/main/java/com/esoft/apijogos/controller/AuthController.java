@@ -27,7 +27,7 @@ public class AuthController {
                 "status", "ok",
                 "mensagem", "API Biblioteca de Jogos",
                 "login", "POST /login",
-                "jogos", "GET /jogos (header Authorization: Bearer <token>)",
+                "jogos", "GET /jogos (público no browser); POST/PUT/DELETE precisam Bearer",
                 "teste", "GET /login-test"
         );
     }
