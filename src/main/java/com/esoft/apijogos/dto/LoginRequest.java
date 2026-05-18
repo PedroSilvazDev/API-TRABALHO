@@ -1,7 +1,15 @@
 package com.esoft.apijogos.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 public class LoginRequest {
+
+    @NotBlank(message = "O campo email é obrigatório")
+    @Email(message = "Email inválido")
     private String email;
+
+    @NotBlank(message = "O campo password é obrigatório")
     private String password;
 
     public LoginRequest() {}

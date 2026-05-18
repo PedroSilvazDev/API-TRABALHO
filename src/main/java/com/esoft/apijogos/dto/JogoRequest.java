@@ -1,9 +1,24 @@
 package com.esoft.apijogos.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class JogoRequest {
+
+    @NotBlank(message = "O campo nome é obrigatório")
     private String nome;
+
+    @NotBlank(message = "O campo tipo é obrigatório")
     private String tipo;
+
+    @NotNull(message = "O campo nota é obrigatório")
+    @Min(value = 0, message = "A nota deve ser no mínimo 0")
+    @Max(value = 10, message = "A nota deve ser no máximo 10")
     private Integer nota;
+
+    @NotBlank(message = "O campo review é obrigatório")
     private String review;
 
     public JogoRequest() {}
