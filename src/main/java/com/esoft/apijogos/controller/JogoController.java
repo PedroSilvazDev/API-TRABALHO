@@ -2,7 +2,6 @@ package com.esoft.apijogos.controller;
 
 import com.esoft.apijogos.dto.JogoRequest;
 import com.esoft.apijogos.model.Jogo;
-import com.esoft.apijogos.service.AuthService;
 import com.esoft.apijogos.service.JogoService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -16,11 +15,9 @@ import java.util.List;
 public class JogoController {
 
     private final JogoService jogoService;
-    private final AuthService authService;
 
-    public JogoController(JogoService jogoService, AuthService authService) {
+    public JogoController(JogoService jogoService) {
         this.jogoService = jogoService;
-        this.authService = authService;
     }
 
     @GetMapping
@@ -34,25 +31,18 @@ public class JogoController {
     }
 
     @PostMapping
-    public ResponseEntity<Jogo> criarJogo(@Valid @RequestBody JogoRequest request,
-                                          @RequestHeader(value = "Authorization", required = false) String authorization) {
-        authService.validarToken(authorization);
+    public ResponseEntity<Jogo> criarJogo(@Valid @RequestBody JogoRequest request) {
         Jogo novoJogo = jogoService.criar(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoJogo);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Jogo> atualizarJogo(@PathVariable Integer id,
-                                              @Valid @RequestBody JogoRequest request,
-                                              @RequestHeader(value = "Authorization", required = false) String authorization) {
-        authService.validarToken(authorization);
+    public ResponseEntity<Jogo> atualizarJogo(@PathVariable Integer id, @Valid @RequestBody JogoRequest request) {
         return ResponseEntity.ok(jogoService.atualizar(id, request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarJogo(@PathVariable Integer id,
-                                            @RequestHeader(value = "Authorization", required = false) String authorization) {
-        authService.validarToken(authorization);
+    public ResponseEntity<Void> deletarJogo(@PathVariable Integer id) {
         jogoService.deletar(id);
         return ResponseEntity.noContent().build();
     }
